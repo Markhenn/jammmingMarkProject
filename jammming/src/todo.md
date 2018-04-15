@@ -19,6 +19,12 @@ Change Playlist Title — users can change the title of their custom playlist.
 
 Save Playlist to Account — users can save their custom playlist by clicking a button called SAVE TO SPOTIFY.
 
+## Useful things
+
+Spotify access
+Client ID b301371f68f341c8b50a2262ef34a1a8
+Client Secret 20c80ad5a49644199be078e759650ed7
+
 ## Things to look out for
 
 What components does the application need?
