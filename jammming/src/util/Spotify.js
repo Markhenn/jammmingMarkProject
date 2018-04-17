@@ -24,3 +24,22 @@ https://api.spotify.com/v1/albums/{id}/tracks
 POST
 */
 
+//Return title, artist, album and an id or url to find on spotify
+import {Tracks} from '../Helpfiles/tracksearch';
+
+export const Spotify = {
+
+    search() {
+
+        return Tracks.tracks.items.map(track => {
+            return {
+                album: track.album.name,
+                artist: track.artists[0].name,
+                id: track.id,
+                track: track.name
+            }
+        })
+    }
+};
+
+

@@ -3,17 +3,34 @@ import './App.css';
 import {SearchBar} from './components/SearchBar/SearchBar';
 import {Songlist} from './components/Songlist/Songlist';
 import {Playlist} from './components/Playlist/Playlist';
+import {Spotify} from './util/Spotify';
 
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      songlist: [],
+      playlist: []
+    }
+    this.searchSpotify = this.searchSpotify.bind(this);
+  }
+
+  searchSpotify(){
+    let songlist = Spotify.search();
+    console.log(songlist);
+    this.setState({songlist});
+    
+  }
+
   render() {
     return (
       <div>
-        <h1>Ja<span class="highlight">mmm</span>ing</h1>
+        <h1>Ja<span className="highlight">mmm</span>ing</h1>
         <div className="App">
-          <SearchBar />
-          <div class="App-playlist">
-            <Songlist /> 
+          <SearchBar searchSpotify={this.searchSpotify} />
+          <div className="App-playlist">
+            <Songlist songlist={this.state.songlist} /> 
             <Playlist />
           </div>
         </div>
