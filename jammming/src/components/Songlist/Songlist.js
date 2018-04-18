@@ -11,7 +11,9 @@ export class Songlist extends React.Component {
                 <h2>Results</h2>
                 <div className="TrackList">
                     {
-                        this.props.songlist.map(song => <Song key={song.id} song={song} />)
+                        this.props.songlist.map(song => {
+                            return <Song key={song.id} song={song} onClick={this.props.addToPlaylist} addDelete='+' />;
+                        })
                            
                     }
                 </div>

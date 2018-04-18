@@ -14,13 +14,38 @@ class App extends Component {
       playlist: []
     }
     this.searchSpotify = this.searchSpotify.bind(this);
+    this.addToPlaylist = this.addToPlaylist.bind(this);
+    this.deleteFromPlaylist = this.deleteFromPlaylist.bind(this);
   }
 
   searchSpotify(){
     let songlist = Spotify.search();
-    console.log(songlist);
     this.setState({songlist});
     
+  }
+
+  addToPlaylist(track){
+    let SongNotInList = true;
+    this.state.playlist.forEach(song => {
+
+      if(track.id === song.id){
+        console.log('Track already in List. Please choose another song!');
+        return SongNotInList = false;
+      } 
+      
+    });
+
+    if(SongNotInList) {
+      const playlist = this.state.playlist;
+      playlist.push(track);
+      this.setState({ playlist });
+    } 
+
+  }
+
+  deleteFromPlaylist(track){
+    //here must go the code 
+    console.log(this.state.playlist);
   }
 
   render() {
@@ -30,8 +55,8 @@ class App extends Component {
         <div className="App">
           <SearchBar searchSpotify={this.searchSpotify} />
           <div className="App-playlist">
-            <Songlist songlist={this.state.songlist} /> 
-            <Playlist />
+            <Songlist addToPlaylist={this.addToPlaylist} songlist={this.state.songlist} /> 
+            <Playlist deleteFromPlaylist={this.deleteFromPlaylist} playlist={this.state.playlist} />
           </div>
         </div>
       </div>

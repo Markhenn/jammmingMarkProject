@@ -29,12 +29,14 @@ Client Secret 20c80ad5a49644199be078e759650ed7
 
 What components does the application need?
 
-- Searchbar
-- Found song list
-- playlist
-    - playlist songs
-    - name playlist
-    - save button
+
+- delete button deletes songs playlist array in this state
+- Search connects to spotify and gets songs
+    - tracks directly
+    - albums and artist by taking their id and then finding their songs
+- Save playlist saves playlist to spotify
+    - decide if the save method should stay in playlist name or if it should move to app.js
+    - create an extra component for the save button
 
 
 How will the application handle state?
