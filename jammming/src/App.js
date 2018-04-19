@@ -11,11 +11,14 @@ class App extends Component {
     super(props);
     this.state = {
       songlist: [],
-      playlist: []
+      playlist: [],
+      name: ''
     }
     this.searchSpotify = this.searchSpotify.bind(this);
     this.addToPlaylist = this.addToPlaylist.bind(this);
     this.deleteFromPlaylist = this.deleteFromPlaylist.bind(this);
+    this.changePlaylistName = this.changePlaylistName.bind(this);
+    this.saveToSpotify = this.saveToSpotify.bind(this);
   }
 
   searchSpotify(){
@@ -24,7 +27,13 @@ class App extends Component {
     
   }
 
+  saveToSpotify(){
+    console.log(`Saving Playlist: ${this.state.name} to Spotify!`);
+  }
+
   addToPlaylist(track){
+
+    
     let SongNotInList = true;
     this.state.playlist.forEach(song => {
 
@@ -44,8 +53,17 @@ class App extends Component {
   }
 
   deleteFromPlaylist(track){
-    //here must go the code 
-    console.log(this.state.playlist);
+    let playlist = this.state.playlist;
+
+    playlist.splice(playlist.findIndex(song => song === track), 1);
+
+    this.setState({playlist});
+
+  }
+
+  changePlaylistName(name){
+    this.setState({name});
+    console.log(this.state.name);
   }
 
   render() {
@@ -56,7 +74,7 @@ class App extends Component {
           <SearchBar searchSpotify={this.searchSpotify} />
           <div className="App-playlist">
             <Songlist addToPlaylist={this.addToPlaylist} songlist={this.state.songlist} /> 
-            <Playlist deleteFromPlaylist={this.deleteFromPlaylist} playlist={this.state.playlist} />
+            <Playlist deleteFromPlaylist={this.deleteFromPlaylist} playlist={this.state.playlist} changePLName={this.changePlaylistName} savePlaylist={this.saveToSpotify}/>
           </div>
         </div>
       </div>
