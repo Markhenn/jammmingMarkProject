@@ -28,21 +28,12 @@ class App extends Component {
   }
 
   saveToSpotify(){
-    console.log(`Saving Playlist: ${this.state.name} to Spotify!`);
+    Spotify.save(this.state.name, this.state.playlist);
   }
 
   addToPlaylist(track){
-
-    
-    let SongNotInList = true;
-    this.state.playlist.forEach(song => {
-
-      if(track.id === song.id){
-        console.log('Track already in List. Please choose another song!');
-        return SongNotInList = false;
-      } 
-      
-    });
+    //this checks if the song is already in the playlist
+    let SongNotInList = this.state.playlist.every(song => song !== track);
 
     if(SongNotInList) {
       const playlist = this.state.playlist;

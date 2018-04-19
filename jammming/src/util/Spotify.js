@@ -39,7 +39,21 @@ export const Spotify = {
                 track: track.name
             }
         })
+    },
+
+    save(name, playlist){
+
+        
+
+        if (!name) {
+           return console.log('Please choose a playlist name!');
+        }
+
+        if (playlist.length === 0) {
+            return console.log('Please add songs to playlist!');
+        }
+
+        console.log(playlist);
+        console.log(`Saving Playlist: ${name} to Spotify!`);
     }
 };
-
-
