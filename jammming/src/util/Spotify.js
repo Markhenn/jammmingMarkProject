@@ -29,8 +29,7 @@ import {Tracks} from '../Helpfiles/tracksearch';
 
 export const Spotify = {
 
-    search() {
-
+    search(searchWord) {
         return Tracks.tracks.items.map(track => {
             return {
                 album: track.album.name,

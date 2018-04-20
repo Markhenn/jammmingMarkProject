@@ -12,7 +12,7 @@ class App extends Component {
     this.state = {
       songlist: [],
       playlist: [],
-      name: ''
+      name: '',
     }
     this.searchSpotify = this.searchSpotify.bind(this);
     this.addToPlaylist = this.addToPlaylist.bind(this);
@@ -21,8 +21,8 @@ class App extends Component {
     this.saveToSpotify = this.saveToSpotify.bind(this);
   }
 
-  searchSpotify(){
-    let songlist = Spotify.search();
+  searchSpotify(searchWord){
+    let songlist = Spotify.search(searchWord);
     this.setState({songlist});
     
   }
@@ -57,6 +57,7 @@ class App extends Component {
     console.log(this.state.name);
   }
 
+
   render() {
     return (
       <div>
@@ -76,8 +77,8 @@ class App extends Component {
 export default App;
 
 
-/* old app class saved
-class App extends Component {
+/** old app class saved
+* class App extends Component {
   render() {
     return (
       <div className="App">

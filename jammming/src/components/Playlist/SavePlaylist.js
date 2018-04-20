@@ -8,7 +8,7 @@ export class SavePlaylist extends React.Component{
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(event){
+    handleClick(){
         this.props.onClick();
     }
 

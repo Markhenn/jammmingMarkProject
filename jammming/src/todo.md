@@ -29,6 +29,7 @@ Client Secret 20c80ad5a49644199be078e759650ed7
 
 What components does the application need?
 
+- get the searchbar to save the input in a state
 
 - Search connects to spotify and gets songs
     - tracks directly

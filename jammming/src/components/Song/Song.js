@@ -7,7 +7,7 @@ export class Song extends React.Component{
         this.handleClick = this.handleClick.bind(this);
     }
     
-    handleClick(event){
+    handleClick(){
         const track = this.props.song;
         this.props.onClick(track);
     }
