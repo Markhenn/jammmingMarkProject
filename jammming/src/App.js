@@ -21,14 +21,20 @@ class App extends Component {
     this.saveToSpotify = this.saveToSpotify.bind(this);
   }
 
-  searchSpotify(searchWord){
-    let songlist = Spotify.search(searchWord);
-    this.setState({songlist});
-    
+  searchSpotify(searchWord){;
+   Spotify.search(searchWord).then(songlist => {
+     this.setState({ songlist });
+   });
+     
+   console.log(this.state.songlist);
   }
 
   saveToSpotify(){
-    Spotify.save(this.state.name, this.state.playlist);
+    const uriArray = this.state.playlist.map(track => {
+      return track.uri;
+    });
+    console.log(uriArray);
+    Spotify.save(this.state.name, uriArray);
   }
 
   addToPlaylist(track){
@@ -54,7 +60,6 @@ class App extends Component {
 
   changePlaylistName(name){
     this.setState({name});
-    console.log(this.state.name);
   }
 
 
