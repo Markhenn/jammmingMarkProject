@@ -29,16 +29,7 @@ Client Secret 20c80ad5a49644199be078e759650ed7
 
 What components does the application need?
 
-- get the searchbar to save the input in a state
+- clean up code
 
-- Search connects to spotify and gets songs
-    - tracks directly
-    - albums and artist by taking their id and then finding their songs
-- Save playlist saves playlist to spotify
     
 
-
-How will the application handle state?
-What methods does the application need?
-How does the application hook up to the Spotify API?
-How does the application save a playlist to a user's profile? As you complete the steps, you can compare the structure you devised to the one we use recommend in the project steps.

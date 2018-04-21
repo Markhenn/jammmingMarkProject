@@ -25,15 +25,12 @@ class App extends Component {
    Spotify.search(searchWord).then(songlist => {
      this.setState({ songlist });
    });
-     
-   console.log(this.state.songlist);
   }
 
   saveToSpotify(){
     const uriArray = this.state.playlist.map(track => {
       return track.uri;
     });
-    console.log(uriArray);
     Spotify.save(this.state.name, uriArray);
   }
 
@@ -51,9 +48,7 @@ class App extends Component {
 
   deleteFromPlaylist(track){
     let playlist = this.state.playlist;
-
     playlist.splice(playlist.findIndex(song => song === track), 1);
-
     this.setState({playlist});
 
   }

@@ -19,7 +19,7 @@ export const Spotify = {
                 return accessToken;
             } else {
 
-            window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
+            window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-private&redirect_uri=${redirectUri}`;
             }
         },
 
@@ -55,17 +55,19 @@ export const Spotify = {
 
     },
 
-    save(name, trackUri){
+    save(name, trackUris){
 
         if (!name) {
            return console.log('Please choose a playlist name!');
         }
 
-        if (trackUri.length === 0) {
+        if (trackUris.length === 0) {
             return console.log('Please add songs to playlist!');
         }
 
         const urlToGetId = 'https://api.spotify.com/v1/me';
+        let userId = '';
+        let playlistId = '';
         
         return fetch(urlToGetId, {
             headers: {
@@ -74,28 +76,38 @@ export const Spotify = {
         }).then(response => {
             return response.json();
         }).then(jsonResponse => {
-            console.log(jsonResponse.id);
-            return jsonResponse.id;
-        }).then(userId => {
+            userId = jsonResponse.id;
+        }).then(() => {
             const urlToCreatePL = `https://api.spotify.com/v1/users/${userId}/playlists`;
             return fetch(urlToCreatePL, {
                 method: 'POST',
                 body: JSON.stringify({
                     "name": name,
-                    "description": `Playlist created by ${this.userID}`,
                     "public": false
                 }),
                 headers: {
+                    "Content-type": "application/json",
+                    Accept: "application / json",
                     Authorization: `Bearer ${accessToken}`
                 }
             })
         }).then(response => {
             return response.json();
         }).then(jsonResponse => {
-            console.log(jsonResponse);
-        })
-
-       
+            playlistId = jsonResponse.id;           
+        }).then(() => {
+            const urlToAddTracks = `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`;
+            return fetch(urlToAddTracks, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${accessToken}`
+                },
+                body: JSON.stringify({
+                    uris: trackUris
+                })
+            })
+        }).then(response => console.log(response)); 
      
     }
 };
