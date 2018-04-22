@@ -1,7 +1,4 @@
 import React from 'react';
-
-
-
 export class PlaylistName extends React.Component{
     constructor(props){
         super(props);

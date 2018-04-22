@@ -22,7 +22,7 @@ Save Playlist to Account — users can save their custom playlist by clicking a 
 
 What components does the application need?
 
-- clean up code
+- put code up on surge
 
     
 

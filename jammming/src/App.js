@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import {SearchBar} from './components/SearchBar/SearchBar';
-import {Songlist} from './components/Songlist/Songlist';
+import {Searchlist} from './components/Searchlist/Searchlist';
 import {Playlist} from './components/Playlist/Playlist';
 import {Spotify} from './util/Spotify';
 
@@ -10,7 +10,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      songlist: [],
+      searchlist: [],
       playlist: [],
       name: '',
     }
@@ -22,8 +22,8 @@ class App extends Component {
   }
 
   searchSpotify(searchWord){;
-   Spotify.search(searchWord).then(songlist => {
-     this.setState({ songlist });
+   Spotify.search(searchWord).then(searchlist => {
+     this.setState({ searchlist });
    });
   }
 
@@ -65,7 +65,7 @@ class App extends Component {
         <div className="App">
           <SearchBar searchSpotify={this.searchSpotify} />
           <div className="App-playlist">
-            <Songlist addToPlaylist={this.addToPlaylist} songlist={this.state.songlist} /> 
+            <Searchlist addToPlaylist={this.addToPlaylist} searchlist={this.state.searchlist} /> 
             <Playlist deleteFromPlaylist={this.deleteFromPlaylist} playlist={this.state.playlist} changePLName={this.changePlaylistName} savePlaylist={this.saveToSpotify}/>
           </div>
         </div>
@@ -75,22 +75,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-/** old app class saved
-* class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
-*/

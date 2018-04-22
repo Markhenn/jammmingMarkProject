@@ -1,8 +1,8 @@
 import React from 'react';
-import './Songlist.css';
-import {Song} from '../Song/Song';
+import './Searchlist.css';
+import {Track} from '../Track/Track';
 
-export class Songlist extends React.Component {
+export class Searchlist extends React.Component {
 
 
     render() {
@@ -11,8 +11,8 @@ export class Songlist extends React.Component {
                 <h2>Results</h2>
                 <div className="TrackList">
                     {
-                        this.props.songlist.map(song => {
-                            return <Song key={song.id} song={song} onClick={this.props.addToPlaylist} addDelete='+' />;
+                        this.props.searchlist.map(track => {
+                            return <Track key={track.id} track={track} onClick={this.props.addToPlaylist} addDelete='+' />;
                         })
                            
                     }
