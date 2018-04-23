@@ -22,7 +22,8 @@ Save Playlist to Account — users can save their custom playlist by clicking a 
 
 What components does the application need?
 
-- put code up on surge
+## Server on surge
+mark-spotify-cc.surge.sh
 
     
 
