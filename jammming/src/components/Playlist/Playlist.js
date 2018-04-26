@@ -20,7 +20,7 @@ export class Playlist extends React.Component {
   render() {
     return (
       <div className="Playlist">
-        <input placeholder="New Playlist" onChange={this.handleChange} />
+        <input value="New Playlist" onChange={this.handleChange} />
         <div className="TrackList">
           {this.props.playlist.map(track => {
             return (

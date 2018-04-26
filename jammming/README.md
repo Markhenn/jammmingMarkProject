@@ -1,3 +1,16 @@
+#Jammming App for Codecademy Class
+
+This App was created by Mark Henninger 
+
+- about the app
+- how to run locally
+- stacks used
+- technical rational
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
