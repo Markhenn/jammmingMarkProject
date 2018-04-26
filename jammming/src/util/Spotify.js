@@ -23,9 +23,7 @@ export const Spotify = {
             }
         },
 
-
     search(searchWord) {
-
         this.getAccessToken();
 
         const urlToFetchTracks = `https://api.spotify.com/v1/search?q=${searchWord}&type=track&limit=20`;
@@ -37,22 +35,19 @@ export const Spotify = {
         }).then(response => {
             return response.json();
         }).then(jsonResponse =>{
-            if (jsonResponse.tracks.items.length !== 0) {
-               return jsonResponse.tracks.items.map(track => {
-                    return {
-                        album: track.album.name,
-                        artist: track.artists[0].name,
-                        id: track.id,
-                        track: track.name,
-                        uri: track.uri
-                    };
-                })
-            } else {
+            if (!jsonResponse.tracks) { 
                 return [];
             }
-            
+            return jsonResponse.tracks.items.map(track => {
+                return {
+                    album: track.album.name,
+                    artist: track.artists[0].name,
+                    id: track.id,
+                    name: track.name,
+                    uri: track.uri
+                };
+            })              
         });
-
     },
 
     save(name, trackUris){
