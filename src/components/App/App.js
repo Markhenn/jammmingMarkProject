@@ -4,7 +4,7 @@ import { SearchBar } from "../SearchBar/SearchBar";
 import { Searchlist } from "../Searchlist/Searchlist";
 import { Playlist } from "../Playlist/Playlist";
 import { Spotify } from "../../util/Spotify";
-import { PlaylistList } from "./components/PlaylistList/PlaylistList";
+import { PlaylistList } from "../PlaylistList/PlaylistList";
 
 class App extends Component {
   constructor(props) {

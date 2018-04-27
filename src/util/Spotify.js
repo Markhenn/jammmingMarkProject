@@ -1,8 +1,7 @@
 const clientId = "b301371f68f341c8b50a2262ef34a1a8"; // Insert client ID here.
-//const redirectUri = window.location.href;
-
 const redirectUri = "http://localhost:3000"; // Have to add this to your accepted Spotify redirect URIs on the Spotify API.
 let accessToken;
+let userId;
 
 export const Spotify = {
   getAccessToken() {
@@ -58,20 +57,11 @@ export const Spotify = {
       return console.log("Please add songs to playlist!");
     }
 
-    const urlToGetId = "https://api.spotify.com/v1/me";
-    let userId = "";
     let playlistId = "";
-    let headers = { Authorization: `Bearer ${accessToken}` };
+    const userPromise = this.getCurrentUserId();
+    console.log(userId);
 
-    return fetch(urlToGetId, {
-      headers: headers
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(jsonResponse => {
-        userId = jsonResponse.id;
-      })
+    userPromise
       .then(() => {
         const urlToCreatePL = `https://api.spotify.com/v1/users/${userId}/playlists`;
         return fetch(urlToCreatePL, {
@@ -107,5 +97,49 @@ export const Spotify = {
         });
       })
       .then(response => console.log(response));
+  },
+
+  getUserPlaylists() {
+    this.getAccessToken();
+
+    const userPromise = this.getCurrentUserId();
+    console.log(userPromise);
+
+    return userPromise.then(() => {
+      const urlToGetPlaylists = `https://api.spotify.com/v1/users/${userId}/playlists`;
+
+      return fetch(urlToGetPlaylists, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      })
+        .then(response => {
+          return response.json();
+        })
+        .then(jsonResponse => {
+          console.log(jsonResponse);
+        });
+    });
+  },
+
+  getCurrentUserId() {
+    if (userId) {
+      const test = Promise.resolve(userId);
+      console.log(test);
+      return test;
+    }
+    const urlToGetId = "https://api.spotify.com/v1/me";
+
+    return fetch(urlToGetId, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(jsonResponse => {
+        return (userId = jsonResponse.id);
+      });
   }
 };

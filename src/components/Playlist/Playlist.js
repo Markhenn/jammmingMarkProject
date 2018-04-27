@@ -31,7 +31,7 @@ export class Playlist extends React.Component {
     return (
       <div className="Playlist">
         <input
-          defaultValue={"New Playlist"}
+          placeholder={"New Playlist"}
           value={this.state.plName}
           onChange={this.handleChange}
         />
