@@ -1,24 +1,17 @@
 import React from "react";
 import "./Searchlist.css";
-import { Track } from "../Track/Track";
+import { Tracklist } from "../Tracklist/Tracklist";
 
 export class Searchlist extends React.Component {
   render() {
     return (
       <div className="SearchResults">
         <h2>Results</h2>
-        <div className="TrackList">
-          {this.props.searchlist.map(track => {
-            return (
-              <Track
-                key={track.id}
-                track={track}
-                onClick={this.props.addToPlaylist}
-                addDelete="+"
-              />
-            );
-          })}
-        </div>
+        <Tracklist
+          addRemoveButton={this.props.addToPlaylist}
+          tracklist={this.props.searchlist}
+          isRemoval={false}
+        />
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React from "react";
 import "./Playlist.css";
-import { Track } from "../Track/Track";
+import { Tracklist } from "../Tracklist/Tracklist";
 
 export class Playlist extends React.Component {
   constructor(props) {
@@ -14,25 +14,18 @@ export class Playlist extends React.Component {
   }
 
   handleClick() {
-    this.props.deleteFromPlaylist();
+    this.props.savePlaylist();
   }
 
   render() {
     return (
       <div className="Playlist">
-        <input value="New Playlist" onChange={this.handleChange} />
-        <div className="TrackList">
-          {this.props.playlist.map(track => {
-            return (
-              <Track
-                key={track.id}
-                track={track}
-                onClick={this.props.deleteFromPlaylist}
-                addDelete="-"
-              />
-            );
-          })}
-        </div>
+        <input defaultValue={"New Playlist"} onChange={this.handleChange} />
+        <Tracklist
+          addRemoveButton={this.props.deleteFromPlaylist}
+          tracklist={this.props.playlist}
+          isRemoval={true}
+        />
         <a className="Playlist-save" onClick={this.handleClick}>
           SAVE TO SPOTIFY
         </a>

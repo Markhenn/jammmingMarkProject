@@ -4,12 +4,34 @@ import "./Track.css";
 export class Track extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
+    this.addTrack = this.addTrack.bind(this);
   }
 
-  handleClick() {
+  addTrack() {
     const track = this.props.track;
     this.props.onClick(track);
+  }
+
+  removeTrack() {
+    const track = this.props.track;
+    this.props.onClick(track);
+  }
+
+  renderAction(isRemoval) {
+    if (isRemoval) {
+      return (
+        <a className="Track-action" onClick={this.removeTrack}>
+          -
+        </a>
+      );
+    } else {
+      return (
+        <a className="Track-action" onClick={this.addTrack}>
+          +
+        </a>
+      );
+    }
   }
 
   render() {
@@ -21,9 +43,7 @@ export class Track extends React.Component {
             {this.props.track.artist} | {this.props.track.album}
           </p>
         </div>
-        <a className="Track-action" onClick={this.handleClick}>
-          {this.props.addDelete}
-        </a>
+        {this.renderAction(this.props.isRemoval)}
       </div>
     );
   }

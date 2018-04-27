@@ -11,7 +11,7 @@ class App extends Component {
     this.state = {
       searchlist: [],
       playlist: [],
-      name: ""
+      PlaylistName: ""
     };
     this.searchSpotify = this.searchSpotify.bind(this);
     this.addToPlaylist = this.addToPlaylist.bind(this);
@@ -30,12 +30,14 @@ class App extends Component {
     const uriArray = this.state.playlist.map(track => {
       return track.uri;
     });
-    Spotify.save(this.state.name, uriArray);
+    Spotify.save(this.state.playlistName, uriArray);
   }
 
   addToPlaylist(track) {
     //this checks if the song is already in the playlist
-    let SongNotInList = this.state.playlist.every(song => song !== track);
+    let SongNotInList = this.state.playlist.every(
+      trackInList => trackInList.id !== track.id
+    );
     if (SongNotInList) {
       const playlist = this.state.playlist;
       playlist.push(track);
@@ -49,8 +51,8 @@ class App extends Component {
     this.setState({ playlist });
   }
 
-  changePlaylistName(name) {
-    this.setState({ name });
+  changePlaylistName(playlistName) {
+    this.setState({ playlistName });
   }
 
   render() {
@@ -60,7 +62,7 @@ class App extends Component {
           Ja<span className="highlight">mmm</span>ing
         </h1>
         <div className="App">
-          <SearchBar searchSpotify={this.searchSpotify} />
+          <SearchBar onSearch={this.searchSpotify} />
           <div className="App-playlist">
             <Searchlist
               addToPlaylist={this.addToPlaylist}

@@ -1,11 +1,17 @@
 #Jammming App for Codecademy Class
 
+## Creater 
 This App was created by Mark Henninger 
 
-- about the app
-- how to run locally
-- stacks used
-- technical rational
+## About the app
+The app lets the user search tracks on Spotify.com. These tracks can be added to a custom playlist, which in turn can be uploaded to Spotify.com.
+
+## Installation
+1. Clone the repo with `git clone https://github.com/Markhenn/jammmingMarkProject.git`
+2. Go into the cloned folder cd jammming
+3. Install the app with `npm install`
+4. start the app `npm run start`
+
 
 
 

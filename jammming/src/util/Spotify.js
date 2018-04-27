@@ -1,4 +1,6 @@
 const clientId = "b301371f68f341c8b50a2262ef34a1a8"; // Insert client ID here.
+//const redirectUri = window.location.href;
+
 const redirectUri = "http://localhost:3000"; // Have to add this to your accepted Spotify redirect URIs on the Spotify API.
 let accessToken;
 
@@ -52,10 +54,6 @@ export const Spotify = {
   },
 
   save(name, trackUris) {
-    if (!name) {
-      return console.log("Please choose a playlist name!");
-    }
-
     if (trackUris.length === 0) {
       return console.log("Please add songs to playlist!");
     }
@@ -63,11 +61,10 @@ export const Spotify = {
     const urlToGetId = "https://api.spotify.com/v1/me";
     let userId = "";
     let playlistId = "";
+    let headers = { Authorization: `Bearer ${accessToken}` };
 
     return fetch(urlToGetId, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
+      headers: headers
     })
       .then(response => {
         return response.json();
