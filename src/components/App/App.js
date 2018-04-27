@@ -4,6 +4,7 @@ import { SearchBar } from "../SearchBar/SearchBar";
 import { Searchlist } from "../Searchlist/Searchlist";
 import { Playlist } from "../Playlist/Playlist";
 import { Spotify } from "../../util/Spotify";
+import { PlaylistList } from "./components/PlaylistList/PlaylistList";
 
 class App extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class App extends Component {
     this.deleteFromPlaylist = this.deleteFromPlaylist.bind(this);
     this.changePlaylistName = this.changePlaylistName.bind(this);
     this.saveToSpotify = this.saveToSpotify.bind(this);
+    this.getPlaylistsfromSpotify = this.getPlaylistsfromSpotify.bind(this);
   }
 
   searchSpotify(searchWord) {
@@ -55,6 +57,10 @@ class App extends Component {
     this.setState({ playlistName });
   }
 
+  getPlaylistsfromSpotify() {
+    Spotify.getUserPlaylists();
+  }
+
   render() {
     return (
       <div>
@@ -74,6 +80,7 @@ class App extends Component {
               changePLName={this.changePlaylistName}
               savePlaylist={this.saveToSpotify}
             />
+            <PlaylistList getPlaylists={this.getPlaylistsfromSpotify} />
           </div>
         </div>
       </div>

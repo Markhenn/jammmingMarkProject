@@ -5,11 +5,14 @@ import { Tracklist } from "../Tracklist/Tracklist";
 export class Playlist extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { plName: "" };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.enterPressed = this.enterPressed.bind(this);
   }
 
   handleChange(event) {
+    this.setState({ plName: event.target.value });
     this.props.changePLName(event.target.value);
   }
 
@@ -17,10 +20,21 @@ export class Playlist extends React.Component {
     this.props.savePlaylist();
   }
 
+  enterPressed(event) {
+    if (event.keyCode === 13) {
+      this.handleClick();
+      this.setState({ plName: "" });
+    }
+  }
+
   render() {
     return (
       <div className="Playlist">
-        <input defaultValue={"New Playlist"} onChange={this.handleChange} />
+        <input
+          defaultValue={"New Playlist"}
+          value={this.state.plName}
+          onChange={this.handleChange}
+        />
         <Tracklist
           addRemoveButton={this.props.deleteFromPlaylist}
           tracklist={this.props.playlist}
