@@ -1,6 +1,6 @@
-#Jammming App for Codecademy Class
+# Jammming App for Codecademy Class
 
-## Creater 
+## Creator 
 This App was created by Mark Henninger 
 
 ## About the app
