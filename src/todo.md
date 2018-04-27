@@ -18,9 +18,7 @@ Change Playlist Title — users can change the title of their custom playlist.
 Save Playlist to Account — users can save their custom playlist by clicking a button called SAVE TO SPOTIFY.
 
 ##todo
-- finish readme stuff
-- go over step by step and change code depending on it
-- fix stuff why it wouldnt load for review
+
 - resubmit to codecademy
 - merge with new content
 - finish showing playlists
