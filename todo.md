@@ -19,9 +19,14 @@ Save Playlist to Account — users can save their custom playlist by clicking a 
 
 ##todo
 
-- resubmit to codecademy
-- merge with new content
-- finish showing playlists
+- style playlist
+    - create new css files to style
+- let playlist show up after clicking
+    - make each playlist a link
+    - write the code in spotify.js to get the track info for the playlist
+    - let that playlist be set as playlist in app.js
+    - add a check to save playlist, if that playlist already exists based on id or if it will be created anew
+- finish showing playlists, by testing
 
 
 
