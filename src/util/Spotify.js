@@ -103,7 +103,6 @@ export const Spotify = {
     this.getAccessToken();
 
     const userPromise = this.getCurrentUserId();
-    console.log(userPromise);
 
     return userPromise.then(() => {
       const urlToGetPlaylists = `https://api.spotify.com/v1/users/${userId}/playlists`;
@@ -117,7 +116,9 @@ export const Spotify = {
           return response.json();
         })
         .then(jsonResponse => {
+          console.log('The Playlists from Spotify:');
           console.log(jsonResponse);
+          return jsonResponse;
         });
     });
   },

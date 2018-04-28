@@ -19,7 +19,7 @@ class App extends Component {
     this.deleteFromPlaylist = this.deleteFromPlaylist.bind(this);
     this.changePlaylistName = this.changePlaylistName.bind(this);
     this.saveToSpotify = this.saveToSpotify.bind(this);
-    this.getPlaylistsfromSpotify = this.getPlaylistsfromSpotify.bind(this);
+    this.getPlaylistsFromSpotify = this.getPlaylistsFromSpotify.bind(this);
   }
 
   searchSpotify(searchWord) {
@@ -57,8 +57,8 @@ class App extends Component {
     this.setState({ playlistName });
   }
 
-  getPlaylistsfromSpotify() {
-    Spotify.getUserPlaylists();
+  getPlaylistsFromSpotify() {
+    return Spotify.getUserPlaylists()
   }
 
   render() {
@@ -80,7 +80,7 @@ class App extends Component {
               changePLName={this.changePlaylistName}
               savePlaylist={this.saveToSpotify}
             />
-            <PlaylistList getPlaylists={this.getPlaylistsfromSpotify} />
+            <PlaylistList getPlaylists={this.getPlaylistsFromSpotify} />
           </div>
         </div>
       </div>

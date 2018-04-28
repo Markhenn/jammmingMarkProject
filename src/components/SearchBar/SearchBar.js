@@ -12,6 +12,7 @@ export class SearchBar extends React.Component {
 
   handleTermChange(event) {
     const searchTerm = event.target.value;
+    sessionStorage.setItem("seachTerm", searchTerm);
     this.setState({ searchTerm });
   }
 
@@ -24,7 +25,7 @@ export class SearchBar extends React.Component {
     const searchTerm = JSON.parse(sessionStorage.getItem("searchTerm"));
 
     if (searchTerm) {
-      this.setState({ searchWord: searchTerm });
+      this.setState({ searchTerm });
     }
   }
 

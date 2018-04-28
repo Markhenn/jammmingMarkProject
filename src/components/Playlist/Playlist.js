@@ -34,6 +34,7 @@ export class Playlist extends React.Component {
           placeholder={"New Playlist"}
           value={this.state.plName}
           onChange={this.handleChange}
+          onKeyDown={this.enterPressed}
         />
         <Tracklist
           addRemoveButton={this.props.deleteFromPlaylist}
