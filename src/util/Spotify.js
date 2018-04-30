@@ -123,6 +123,23 @@ export const Spotify = {
     });
   },
 
+  getPlaylistTracks(id){
+    this.getAccessToken();
+
+    const urlToGetPL = `https://api.spotify.com/v1/users/${userId}/playlists/${id}/tracks`;
+
+    return fetch(urlToGetPL, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+    .then(response => response.json())
+    .then(jsonResponse => {
+      console.log(jsonResponse);
+      return jsonResponse;
+    });
+  },
+
   getCurrentUserId() {
     if (userId) {
       const test = Promise.resolve(userId);

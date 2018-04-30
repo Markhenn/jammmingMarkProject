@@ -20,6 +20,7 @@ class App extends Component {
     this.changePlaylistName = this.changePlaylistName.bind(this);
     this.saveToSpotify = this.saveToSpotify.bind(this);
     this.getPlaylistsFromSpotify = this.getPlaylistsFromSpotify.bind(this);
+    this.selectPlaylist = this.selectPlaylist.bind(this);
   }
 
   searchSpotify(searchWord) {
@@ -58,7 +59,15 @@ class App extends Component {
   }
 
   getPlaylistsFromSpotify() {
-    return Spotify.getUserPlaylists()
+    return Spotify.getUserPlaylists();
+  }
+
+  selectPlaylist(id) {
+    Spotify.getPlaylistTracks(id).then(playlist => {
+      playlist.items.map(tracks => {
+        console.log(tracks);
+      })
+    })
   }
 
   render() {
@@ -80,7 +89,10 @@ class App extends Component {
               changePLName={this.changePlaylistName}
               savePlaylist={this.saveToSpotify}
             />
-            <PlaylistList getPlaylists={this.getPlaylistsFromSpotify} />
+            <PlaylistList
+              getPlaylists={this.getPlaylistsFromSpotify}
+              selectPlaylist={this.selectPlaylist}
+            />
           </div>
         </div>
       </div>

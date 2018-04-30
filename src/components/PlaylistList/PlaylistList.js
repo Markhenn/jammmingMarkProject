@@ -26,8 +26,9 @@ export class PlaylistList extends React.Component {
           {this.state.playlists.map(playlist => {
             return (
               <PlaylistListItem
-                playlistName={playlist.name}
+                playlist={playlist}
                 key={playlist.id}
+                onSelect={this.props.selectPlaylist}
               />
             );
           })}
