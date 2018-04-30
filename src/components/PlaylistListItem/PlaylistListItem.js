@@ -3,12 +3,10 @@ import "./PlaylistListItem.css";
 
 export class PlaylistListItem extends React.Component {
   render() {
-    return (
-      <div className="Track">
-        <div className="Track-information">
-          <p>{this.props.playlistName}</p>
+    return <div className="PlaylistListItem">
+        <div className="PlaylistListItem-Information">
+          <p className="PlaylistAction">{this.props.playlistName}</p>
         </div>
-      </div>
-    );
+      </div>;
   }
 }
