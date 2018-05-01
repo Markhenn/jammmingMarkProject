@@ -52,51 +52,79 @@ export const Spotify = {
       });
   },
 
-  save(name, trackUris) {
+  save(name, trackUris, playlistId) {
     if (trackUris.length === 0) {
       return console.log("Please add songs to playlist!");
     }
 
-    let playlistId = "";
-    const userPromise = this.getCurrentUserId();
-    console.log(userId);
+    if (playlistId) {
+      const urlToUpdatePL = `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}`;
 
-    userPromise
-      .then(() => {
-        const urlToCreatePL = `https://api.spotify.com/v1/users/${userId}/playlists`;
-        return fetch(urlToCreatePL, {
-          method: "POST",
-          body: JSON.stringify({
-            name: name,
-            public: false
-          }),
-          headers: {
-            "Content-type": "application/json",
-            Accept: "application / json",
-            Authorization: `Bearer ${accessToken}`
-          }
-        });
+      fetch(urlToUpdatePL, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`
+        },
+        body: JSON.stringify({
+          name: name
+        })
       })
-      .then(response => {
-        return response.json();
-      })
-      .then(jsonResponse => {
-        playlistId = jsonResponse.id;
-      })
-      .then(() => {
-        const urlToAddTracks = `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`;
-        return fetch(urlToAddTracks, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`
-          },
-          body: JSON.stringify({
-            uris: trackUris
-          })
-        });
-      })
-      .then(response => console.log(response));
+        .then(() => {
+          const urlToAddTracks = `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`;
+          return fetch(urlToAddTracks, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${accessToken}`
+            },
+            body: JSON.stringify({
+              uris: trackUris
+            })
+          });
+        })
+        .then(response => console.log(response));
+    } else {
+      const userPromise = this.getCurrentUserId();
+      console.log(userId);
+
+      userPromise
+        .then(() => {
+          const urlToCreatePL = `https://api.spotify.com/v1/users/${userId}/playlists`;
+          return fetch(urlToCreatePL, {
+            method: "POST",
+            body: JSON.stringify({
+              name: name,
+              public: false
+            }),
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application / json",
+              Authorization: `Bearer ${accessToken}`
+            }
+          });
+        })
+        .then(response => {
+          return response.json();
+        })
+        .then(jsonResponse => {
+          playlistId = jsonResponse.id;
+        })
+        .then(() => {
+          const urlToAddTracks = `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`;
+          return fetch(urlToAddTracks, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${accessToken}`
+            },
+            body: JSON.stringify({
+              uris: trackUris
+            })
+          });
+        })
+        .then(response => console.log(response));
+    }
   },
 
   getUserPlaylists() {

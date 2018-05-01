@@ -20,13 +20,13 @@ Save Playlist to Account — users can save their custom playlist by clicking a 
 ##todo
 
 
-- check when loading playlist for (collaborative -	Boolean	true if the owner allows other users to modify the playlist.) only show playlist if it is true
 
-- let playlist show up after clicking
-    - make each playlist a link
-    - write the code in spotify.js to get the track info for the playlist
-    - let that playlist be set as playlist in app.js
-    - add a check to save playlist, if that playlist already exists based on id or if it will be created anew
+
+- change .selectPlaylist from [0].name to a reduce and map
+- add a check to save playlist, if that playlist already exists based on id or if it will be created anew
+    - make sure that songs get updated on spotify
+    - solve problem of duplicated ids
+    - solve problem of setting state for input correctly
 - finish showing playlists, by testing
 
 

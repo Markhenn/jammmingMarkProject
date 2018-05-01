@@ -13,7 +13,8 @@ class App extends Component {
       searchlist: [],
       playlist: [],
       playlists: [],
-      PlaylistName: ""
+      playlistName: "",
+      playlistId: null
     };
     this.searchSpotify = this.searchSpotify.bind(this);
     this.addToPlaylist = this.addToPlaylist.bind(this);
@@ -34,7 +35,12 @@ class App extends Component {
     const uriArray = this.state.playlist.map(track => {
       return track.uri;
     });
-    Spotify.save(this.state.playlistName, uriArray);
+    Spotify.save(this.state.playlistName, uriArray, this.state.playlistId);
+    this.setState({
+      playlist: [],
+      playlistName: "",
+      playlistId: null
+    })
   }
 
   addToPlaylist(track) {
@@ -72,6 +78,8 @@ class App extends Component {
     console.log(playlistName);
     this.setState({ playlistName });
     console.log(this.state.playlistName);
+
+    this.setState({playlistId: id});
 
     Spotify.getPlaylistTracks(id).then(playlist => {
       this.setState({ playlist });
