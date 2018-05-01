@@ -3,24 +3,15 @@ import "./PlaylistList.css";
 import { PlaylistListItem } from "../PlaylistListItem/PlaylistListItem";
 
 export class PlaylistList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      playlists: []
-    };
-  }
-
   componentWillMount() {
-    this.props.getPlaylists().then(playlists => {
-      this.setState({playlists})
-    });
+    this.props.getPlaylists();
   }
 
   render() {
     return (
       <div className="PlaylistList">
         <h2>Local Playlists</h2>
-        {this.state.playlists.map(playlist => {
+        {this.props.playlists.map(playlist => {
           return (
             <PlaylistListItem
               playlist={playlist}

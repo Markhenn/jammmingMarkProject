@@ -12,6 +12,7 @@ class App extends Component {
     this.state = {
       searchlist: [],
       playlist: [],
+      playlists: [],
       PlaylistName: ""
     };
     this.searchSpotify = this.searchSpotify.bind(this);
@@ -59,10 +60,19 @@ class App extends Component {
   }
 
   getPlaylistsFromSpotify() {
-    return Spotify.getUserPlaylists();
+    Spotify.getUserPlaylists().then(playlists => {
+      this.setState({ playlists });
+    });
   }
 
   selectPlaylist(id) {
+    const playlistName = this.state.playlists.filter(
+      playlist => playlist.id === id
+    )[0].name;
+    console.log(playlistName);
+    this.setState({ playlistName });
+    console.log(this.state.playlistName);
+
     Spotify.getPlaylistTracks(id).then(playlist => {
       this.setState({ playlist });
     });
@@ -82,6 +92,7 @@ class App extends Component {
               searchlist={this.state.searchlist}
             />
             <Playlist
+              playlistName={this.state.playlistName}
               deleteFromPlaylist={this.deleteFromPlaylist}
               playlist={this.state.playlist}
               changePLName={this.changePlaylistName}
@@ -90,6 +101,7 @@ class App extends Component {
             <PlaylistList
               getPlaylists={this.getPlaylistsFromSpotify}
               selectPlaylist={this.selectPlaylist}
+              playlists={this.state.playlists}
             />
           </div>
         </div>
