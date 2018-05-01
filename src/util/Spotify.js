@@ -19,7 +19,7 @@ export const Spotify = {
 
       return accessToken;
     } else {
-      window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-private&redirect_uri=${redirectUri}`;
+      window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-private%20playlist-read-private&redirect_uri=${redirectUri}`;
     }
   },
 
@@ -116,14 +116,12 @@ export const Spotify = {
           return response.json();
         })
         .then(jsonResponse => {
-          console.log('The Playlists from Spotify:');
-          console.log(jsonResponse);
           return jsonResponse;
         });
     });
   },
 
-  getPlaylistTracks(id){
+  getPlaylistTracks(id) {
     this.getAccessToken();
 
     const urlToGetPL = `https://api.spotify.com/v1/users/${userId}/playlists/${id}/tracks`;
@@ -133,11 +131,22 @@ export const Spotify = {
         Authorization: `Bearer ${accessToken}`
       }
     })
-    .then(response => response.json())
-    .then(jsonResponse => {
-      console.log(jsonResponse);
-      return jsonResponse;
-    });
+      .then(response => response.json())
+      .then(jsonResponse => {
+        console.log(jsonResponse);
+        if (!jsonResponse.items) {
+          return [];
+        }
+        return jsonResponse.items.map(plTrack => {
+          return {
+            album: plTrack.track.album.name,
+            artist: plTrack.track.artists[0].name,
+            id: plTrack.track.id,
+            name: plTrack.track.name,
+            uri: plTrack.track.uri
+          };
+        });
+      });
   },
 
   getCurrentUserId() {

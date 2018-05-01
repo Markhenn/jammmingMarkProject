@@ -64,10 +64,8 @@ class App extends Component {
 
   selectPlaylist(id) {
     Spotify.getPlaylistTracks(id).then(playlist => {
-      playlist.items.map(tracks => {
-        console.log(tracks);
-      })
-    })
+      this.setState({ playlist });
+    });
   }
 
   render() {

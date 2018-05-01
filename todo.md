@@ -19,8 +19,9 @@ Save Playlist to Account — users can save their custom playlist by clicking a 
 
 ##todo
 
-- style playlist
-    - create new css files to style
+
+- check when loading playlist for (collaborative -	Boolean	true if the owner allows other users to modify the playlist.) only show playlist if it is true
+
 - let playlist show up after clicking
     - make each playlist a link
     - write the code in spotify.js to get the track info for the playlist
