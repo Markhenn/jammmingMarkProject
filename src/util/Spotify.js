@@ -116,7 +116,13 @@ export const Spotify = {
           return response.json();
         })
         .then(jsonResponse => {
-          return jsonResponse;
+          return jsonResponse.items
+            .filter(playlist => {
+              return playlist.owner.id === userId;
+            })
+            .map(playlist => {
+              return { name: playlist.name, id: playlist.id };
+            });
         });
     });
   },

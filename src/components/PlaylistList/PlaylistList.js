@@ -12,27 +12,24 @@ export class PlaylistList extends React.Component {
 
   componentWillMount() {
     this.props.getPlaylists().then(playlists => {
-      const shortPlaylists = playlists.items.map(playlist => {
-        return { name: playlist.name, id: playlist.id };
-      });
-      this.setState({ playlists: shortPlaylists });
+      this.setState({playlists})
     });
   }
 
   render() {
     return (
-        <div className="PlaylistList">
-          <h2>Local Playlists</h2>
-          {this.state.playlists.map(playlist => {
-            return (
-              <PlaylistListItem
-                playlist={playlist}
-                key={playlist.id}
-                onSelect={this.props.selectPlaylist}
-              />
-            );
-          })}
-        </div>
+      <div className="PlaylistList">
+        <h2>Local Playlists</h2>
+        {this.state.playlists.map(playlist => {
+          return (
+            <PlaylistListItem
+              playlist={playlist}
+              key={playlist.id}
+              onSelect={this.props.selectPlaylist}
+            />
+          );
+        })}
+      </div>
     );
   }
 }
