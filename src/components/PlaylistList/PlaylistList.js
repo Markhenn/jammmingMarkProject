@@ -3,10 +3,17 @@ import "./PlaylistList.css";
 import { PlaylistListItem } from "../PlaylistListItem/PlaylistListItem";
 
 export class PlaylistList extends React.Component {
+  constructor(props){
+    super(props);
+    this.emptyList = this.emptyList.bind(this);
+  }
   componentWillMount() {
     this.props.getPlaylists();
   }
 
+  emptyList(){
+    this.props.emptyPlaylist();
+  }
   render() {
     return (
       <div className="PlaylistList">
@@ -20,6 +27,7 @@ export class PlaylistList extends React.Component {
             />
           );
         })}
+        <a className="EmptyPl" onClick={this.emptyList}>Empty Playlist</a>
       </div>
     );
   }

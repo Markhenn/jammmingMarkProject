@@ -23,6 +23,7 @@ class App extends Component {
     this.saveToSpotify = this.saveToSpotify.bind(this);
     this.getPlaylistsFromSpotify = this.getPlaylistsFromSpotify.bind(this);
     this.selectPlaylist = this.selectPlaylist.bind(this);
+    this.emptyPlaylist = this.emptyPlaylist.bind(this);
   }
 
   searchSpotify(searchWord) {
@@ -72,19 +73,21 @@ class App extends Component {
   }
 
   selectPlaylist(id) {
-    
-    const playlistName = this.state.playlists.filter(
-      playlist => playlist.id === id
-    )[0].name;
-    console.log(playlistName);
-    this.setState({ playlistName });
-    console.log(this.state.playlistName);
-
-    this.setState({ playlistId: id });
+    const playlistName = this.state.playlists
+      .filter(playlist => playlist.id === id)
+      .reduce((acc, currValue) => acc.concat(currValue));
 
     Spotify.getPlaylistTracks(id).then(playlist => {
-      this.setState({ playlist });
+      this.setState({
+        playlistName: playlistName.name,
+        playlistId: id,
+        playlist: playlist
+      });
     });
+  }
+
+  emptyPlaylist() {
+    this.setState({ playlist: [], playlistName: "", playlistId: null });
   }
 
   render() {
@@ -111,6 +114,7 @@ class App extends Component {
               getPlaylists={this.getPlaylistsFromSpotify}
               selectPlaylist={this.selectPlaylist}
               playlists={this.state.playlists}
+              emptyPlaylist={this.emptyPlaylist}
             />
           </div>
         </div>
