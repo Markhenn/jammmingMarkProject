@@ -21,7 +21,7 @@ export class Playlist extends React.Component {
   enterPressed(event) {
     if (event.keyCode === 13) {
       this.handleClick();
-      this.setState({ plName: "" });
+      //this.setState({ plName: "" });
     }
   }
 

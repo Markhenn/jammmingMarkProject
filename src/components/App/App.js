@@ -40,7 +40,7 @@ class App extends Component {
       playlist: [],
       playlistName: "",
       playlistId: null
-    })
+    });
   }
 
   addToPlaylist(track) {
@@ -72,6 +72,7 @@ class App extends Component {
   }
 
   selectPlaylist(id) {
+    
     const playlistName = this.state.playlists.filter(
       playlist => playlist.id === id
     )[0].name;
@@ -79,7 +80,7 @@ class App extends Component {
     this.setState({ playlistName });
     console.log(this.state.playlistName);
 
-    this.setState({playlistId: id});
+    this.setState({ playlistId: id });
 
     Spotify.getPlaylistTracks(id).then(playlist => {
       this.setState({ playlist });

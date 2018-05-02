@@ -73,7 +73,7 @@ export const Spotify = {
         .then(() => {
           const urlToAddTracks = `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`;
           return fetch(urlToAddTracks, {
-            method: "POST",
+            method: "PUT",
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${accessToken}`
